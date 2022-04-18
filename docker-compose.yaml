@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+ 
+  pytorch-mlflow-boilerplate:
+    container_name: pytorch-mlflow-boilerplate
+    image: pytorch/mlflow/boilerplate:2.0
+    build: 
+      context: .
+    working_dir: /home/workdir/
+    entrypoint: /bin/bash
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./scripts:/home/workdir:cached
+      - $PWD":/app
+      - /etc/group:/etc/group:ro
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
+      - /etc/sudoers.d:/etc/sudoers.d:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    user: ${UID}
+    environment:
+      - UID="1000"
+      - DISPLAY=1
+    ports:
+      - 5000:5000
+    networks:
+      - pytorch_mlflow_boilerplate_network
+    # command: mlflow ui --port 5000 --host 0.0.0.0
+  
+networks: 
+  pytorch_mlflow_boilerplate_network:
+    name: pytorch_mlflow_boilerplate_network
