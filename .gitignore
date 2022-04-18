@@ -1,7 +1,7 @@
 # Mlflow
-mlruns/
-mlartifacts/
-outputs/
+*mlruns/
+*mlartifacts/
+*outputs/
 
 # Mac
 .DS_Store
